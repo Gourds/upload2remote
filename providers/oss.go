@@ -1,8 +1,8 @@
 package providers
 import (
-	"github.com/wonderivan/logger"
-	"gourds.site/upload2remote/config"
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/wonderivan/logger"
+	"github.com/gourds/upload2remote/config"
 )
 
 func Upload2oss(objname string,filepath string){

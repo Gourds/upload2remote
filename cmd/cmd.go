@@ -3,7 +3,7 @@ package cmd
 import (
 	"github.com/urfave/cli"
 	"github.com/wonderivan/logger"
-	"gourds.site/upload2remote/config"
+	"github.com/gourds/upload2remote/config"
 	"os"
 )
 

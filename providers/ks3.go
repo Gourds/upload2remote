@@ -6,7 +6,7 @@ import (
 	"github.com/ks3sdklib/aws-sdk-go/aws/credentials"
 	"github.com/ks3sdklib/aws-sdk-go/service/s3"
 	"github.com/wonderivan/logger"
-	"gourds.site/upload2remote/config"
+	"github.com/gourds/upload2remote/config"
 	"io/ioutil"
 	"os"
 )
@@ -15,14 +15,14 @@ func Upload2ks3(objname string,filepath string)  {
 
 	credentials := credentials.NewStaticCredentials(config.CommonCfg.AccessKeyID, config.CommonCfg.AccessKeySecret, "")
 	client := s3.New(&aws.Config{
-		Region: config.CommonCfg.Region,
-		Credentials: credentials,
-		Endpoint: config.CommonCfg.Endpoint,
-		DisableSSL: true,
-		LogLevel: 0,
+		Region:           config.CommonCfg.Region,
+		Credentials:      credentials,
+		Endpoint:         config.CommonCfg.Endpoint,
+		DisableSSL:       true,
+		LogLevel:         0,
 		S3ForcePathStyle: false,
-		LogHTTPBody: true,
-		Logger: os.Stdout,
+		LogHTTPBody:      true,
+		Logger:           os.Stdout,
 	})
 
 	file, err := ioutil.ReadFile(filepath)

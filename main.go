@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/wonderivan/logger"
-	"gourds.site/upload2remote/cmd"
-	"gourds.site/upload2remote/config"
-	"gourds.site/upload2remote/providers"
+	"github.com/gourds/upload2remote/cmd"
+	"github.com/gourds/upload2remote/config"
+	"github.com/gourds/upload2remote/providers"
 	"os"
 	"path"
 	"path/filepath"
@@ -69,7 +69,7 @@ func UploadFiles(files[]string, upload func(objname string, filepath string)) {
 	for _,f := range files{
 		var rf1 = path.Join(config.CommonCfg.RemotRootPath, f)
 		upload(rf1, f)
-		logger.Info("Upload %s to %s://%s/%s Complate", f,config.CommonCfg.Type,config.CommonCfg.Bucket, rf1)
+		logger.Info("Upload %s to %s://%s/%s Complate", f, config.CommonCfg.Type, config.CommonCfg.Bucket, rf1)
 	}
 }
 
@@ -91,7 +91,7 @@ func main() {
 		logger.Debug("upload to aws s3")
 		UploadFiles(files, providers.Upload2s3)
 	default:
-		logger.Debug("gourds")
+		logger.Debug("github.com")
 	}
 
 }

@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/wonderivan/logger"
-	"gourds.site/upload2remote/config"
+	"github.com/gourds/upload2remote/config"
 	"net/http"
 	"os"
 )
