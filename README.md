@@ -24,11 +24,11 @@
 
 ### support & Document
 
-[x] Aliyun: https://help.aliyun.com/document_detail/88426.html
-[ ] 微软云
-[x] 华为云：https://sdkcenter.developer.huaweicloud.com/?product=obs
-[x] aws: https://docs.aws.amazon.com/sdk-for-go/api/service/s3/
-[x] 金山云 ks3 https://console.huaweicloud.com/console/?region=cn-east-3#/obs/manage/jws2-ops-backup-data/object/list
+- [x] Aliyun: https://help.aliyun.com/document_detail/88426.html
+- [ ] 微软云
+- [x] 华为云：https://sdkcenter.developer.huaweicloud.com/?product=obs
+- [x] aws: https://docs.aws.amazon.com/sdk-for-go/api/service/s3/
+- [x] 金山云 ks3 https://console.huaweicloud.com/console/?region=cn-east-3#/obs/manage/jws2-ops-backup-data/object/list
 
 
 
