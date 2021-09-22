@@ -1,0 +1,4 @@
+type = "OSS"
+endpoint = "xxx"
+accessKeyID = "xxx"
+accessKeySecret = "xxx"
