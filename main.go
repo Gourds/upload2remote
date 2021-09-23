@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/wonderivan/logger"
 	"github.com/gourds/upload2remote/cmd"
 	"github.com/gourds/upload2remote/config"
 	"github.com/gourds/upload2remote/providers"
+	"github.com/wonderivan/logger"
 	"os"
 	"path"
 	"path/filepath"

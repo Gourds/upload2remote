@@ -6,8 +6,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
-	"github.com/wonderivan/logger"
 	"github.com/gourds/upload2remote/config"
+	"github.com/wonderivan/logger"
 	"net/http"
 	"os"
 )

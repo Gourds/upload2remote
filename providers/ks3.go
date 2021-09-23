@@ -2,11 +2,11 @@ package providers
 
 import (
 	"bytes"
+	"github.com/gourds/upload2remote/config"
 	"github.com/ks3sdklib/aws-sdk-go/aws"
 	"github.com/ks3sdklib/aws-sdk-go/aws/credentials"
 	"github.com/ks3sdklib/aws-sdk-go/service/s3"
 	"github.com/wonderivan/logger"
-	"github.com/gourds/upload2remote/config"
 	"io/ioutil"
 	"os"
 )

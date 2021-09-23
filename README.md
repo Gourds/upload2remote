@@ -21,6 +21,14 @@
 ./upload2remote -t OSS -s ./test_dir_or_filename -d oss://gourds_111/ ----AccessKeyID xxx --AccessKeySecret xxx --Region xxx --Endpoint ks3-cn-beijing.ksyun.co
 ```
 
+### Todo
+
+- [x] 基本集成
+- [ ] 一次认证多次上传
+- [ ] 并发上传支持
+- [ ] 添加统计信息（耗时、计数）
+- [ ] 内容未改变跳过上传
+
 
 ### support & Document
 

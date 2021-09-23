@@ -1,9 +1,9 @@
 package cmd
 
 import (
+	"github.com/gourds/upload2remote/config"
 	"github.com/urfave/cli"
 	"github.com/wonderivan/logger"
-	"github.com/gourds/upload2remote/config"
 	"os"
 )
 

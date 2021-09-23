@@ -1,9 +1,9 @@
 package providers
 
 import (
+	"github.com/gourds/upload2remote/config"
 	"github.com/huaweicloud/huaweicloud-sdk-go-obs/obs"
 	"github.com/wonderivan/logger"
-	"github.com/gourds/upload2remote/config"
 )
 
 func Upload2obs(objname string,filepath string)  {
