@@ -1,7 +1,6 @@
 package providers
 
 import (
-	"github.com/gourds/upload2remote/config"
 	"github.com/huaweicloud/huaweicloud-sdk-go-obs/obs"
 	"github.com/wonderivan/logger"
 	"path"
@@ -9,9 +8,9 @@ import (
 
 func (c OBS) Auth() (SessionType, error) {
 	logger.Debug("HuaWei login ...")
-	client, err := obs.New(config.CommonCfg.AccessKeyID,
-		config.CommonCfg.AccessKeySecret,
-		config.CommonCfg.Endpoint)
+	client, err := obs.New(c.AccessKeyID,
+		c.AccessKeySecret,
+		c.Endpoint)
 	return SessionType{obs: client}, err
 }
 
