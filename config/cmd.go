@@ -1,23 +1,20 @@
-package cmd
+package config
 
 import (
-	"github.com/gourds/upload2remote/config"
+	"github.com/BurntSushi/toml"
+	"github.com/gourds/upload2remote/version"
 	"github.com/urfave/cli"
 	"github.com/wonderivan/logger"
 	"os"
+	"regexp"
 )
 
-var InputConfig config.Config
-
-var INFO config.Info
-
-
-func CliConfig() {
+func cliConfig() {
 	app := &cli.App{
 		Name:    "upload2remote",
 		Usage:   "Upload local file to remote object stroage",
-		Version: INFO.Version,
-		Author:  INFO.Auther,
+		Version: version.Version,
+		Author:  version.Author,
 		Action: func(c *cli.Context) error { //该命令的执行动作函数
 			return nil
 		},
@@ -75,3 +72,58 @@ func CliConfig() {
 	}
 	logger.Debug(InputConfig)
 }
+
+func getBucket()(map[string]string){
+	//regexp get bucket name from dst path
+	reg1 := regexp.MustCompile(`^(?P<rtype>\w+)://(?P<bucket>.*?)/(?P<rpath>.*)$`)
+	logger.Debug(reg1)
+	rst := reg1.FindStringSubmatch(CommonCfg.DestPath)
+	groupNames := reg1.SubexpNames()
+	gnd := make(map[string]string)
+	for i, name := range groupNames {
+		if i !=0 && name != "" {
+			gnd[name] = rst[i]
+		}
+	}
+	CommonCfg.Bucket = gnd["bucket"]
+	CommonCfg.RemoteRootPath = gnd["rpath"]
+	logger.Debug(gnd)
+	return gnd
+}
+
+func localConfig() {
+	if _, err := toml.DecodeFile("conf/config.toml", &CommonCfg); err != nil {
+		logger.Error(err)
+		os.Exit(1)
+	}
+	logger.Debug(CommonCfg)
+}
+
+func initConfig() {
+	cliConfig()
+	localConfig()
+	if InputConfig.SrcPath != ""{
+		CommonCfg.SrcPath = InputConfig.SrcPath
+	}
+	if InputConfig.DestPath != ""{
+		CommonCfg.DestPath = InputConfig.DestPath
+		getBucket()
+	}
+	if InputConfig.AccessKeyID != ""{
+		CommonCfg.AccessKeyID = InputConfig.AccessKeyID
+	}
+	if InputConfig.AccessKeySecret != ""{
+		CommonCfg.AccessKeySecret = InputConfig.AccessKeySecret
+	}
+	if InputConfig.Endpoint != ""{
+		CommonCfg.Endpoint = InputConfig.Endpoint
+	}
+	if InputConfig.Type != "" {
+		CommonCfg.Type = InputConfig.Type
+	}
+	if InputConfig.Region != "" {
+		CommonCfg.Region = InputConfig.Region
+	}
+	logger.Info("配置信息：",CommonCfg)
+}
+
