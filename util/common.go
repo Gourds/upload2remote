@@ -4,6 +4,7 @@ import (
 	"github.com/wonderivan/logger"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 func ListDir(dirPath string) (files []string, err error) {
@@ -22,4 +23,12 @@ func ListDir(dirPath string) (files []string, err error) {
 		return
 	}
 	return
+}
+
+func MeasureTime(funcName string) func() {
+	start := time.Now()
+	return func() {
+		//fmt.Printf("Time taken by %s function is %v \n", funcName, time.Since(start))
+		logger.Info("Time taken by %s function is %v \n", funcName, time.Since(start))
+	}
 }

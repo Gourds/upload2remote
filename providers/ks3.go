@@ -27,7 +27,6 @@ func (c KS3) Auth() (SessionType, error) {
 }
 
 func (c KS3) UploadFile(objName string, filePath string, client SessionType) (err error) {
-
 	file, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		logger.Error(err)
