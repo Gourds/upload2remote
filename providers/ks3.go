@@ -11,7 +11,7 @@ import (
 	"path"
 )
 
-func (c KS3) Auth() (SessionType, error) {
+func (c *KS3) Auth() (SessionType, error) {
 	credentials := credentials.NewStaticCredentials(c.AccessKeyID, c.AccessKeySecret, "")
 	client := s3.New(&aws.Config{
 		Region:           c.Region,
@@ -26,7 +26,7 @@ func (c KS3) Auth() (SessionType, error) {
 	return SessionType{ks3: client}, nil
 }
 
-func (c KS3) UploadFile(objName string, filePath string, client SessionType) (err error) {
+func (c *KS3) UploadFile(objName string, filePath string, client SessionType) (err error) {
 	file, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		logger.Error(err)

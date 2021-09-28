@@ -6,13 +6,13 @@ import (
 	"path"
 )
 
-func (c OSS) Auth() (SessionType, error) {
+func (c *OSS) Auth() (SessionType, error) {
 	logger.Debug("Alibaba login ...")
 	client, err := oss.New(c.Endpoint, c.AccessKeyID, c.AccessKeySecret)
 	return SessionType{oss: client},err
 }
 
-func (c OSS) UploadFile(objName string, filePath string, client SessionType) (err error) {
+func (c *OSS) UploadFile(objName string, filePath string, client SessionType) (err error) {
 	//获取存储空间
 	bucket, err := client.oss.Bucket(c.Bucket)
 	if err != nil {

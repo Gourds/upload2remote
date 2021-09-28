@@ -40,16 +40,16 @@ type OBS struct {
 func GetConfig() (data ObManager){
 	switch config.CommonCfg.Type {
 	case "OSS":
-		data = OSS{config.CommonCfg}
+		data = &OSS{config.CommonCfg}
 		logger.Info("阿里云",data)
 	case "OBS":
-		data = OBS{config.CommonCfg}
+		data = &OBS{config.CommonCfg}
 		logger.Info("华为云",data)
 	case "S3":
-		data = S3{config.CommonCfg}
+		data = &S3{config.CommonCfg}
 		logger.Info("亚马逊",data)
 	case "KS3":
-		data = KS3{config.CommonCfg}
+		data = &KS3{config.CommonCfg}
 		logger.Info("金山云",data)
 	}
 	return

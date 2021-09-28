@@ -6,7 +6,7 @@ import (
 	"path"
 )
 
-func (c OBS) Auth() (SessionType, error) {
+func (c *OBS) Auth() (SessionType, error) {
 	logger.Debug("HuaWei login ...")
 	client, err := obs.New(c.AccessKeyID,
 		c.AccessKeySecret,
@@ -14,7 +14,7 @@ func (c OBS) Auth() (SessionType, error) {
 	return SessionType{obs: client}, err
 }
 
-func (c OBS) UploadFile(objName string, filePath string, client SessionType) (err error){
+func (c *OBS) UploadFile(objName string, filePath string, client SessionType) (err error){
 
 	input := &obs.PutFileInput{}
 	input.Bucket = c.Bucket

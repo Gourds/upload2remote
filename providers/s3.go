@@ -12,7 +12,7 @@ import (
 	"path"
 )
 
-func (c S3) Auth() (SessionType, error) {
+func (c *S3) Auth() (SessionType, error) {
 	client, err := session.NewSession(&aws.Config{
 		Region: aws.String(c.Region),
 		Credentials: credentials.NewStaticCredentials(
@@ -23,7 +23,7 @@ func (c S3) Auth() (SessionType, error) {
 	return SessionType{s3: client}, err
 }
 
-func (c S3) UploadFile(objName string, filePath string, client SessionType) (err error){
+func (c *S3) UploadFile(objName string, filePath string, client SessionType) (err error){
 
 	file, err := os.Open(filePath)
 	if err != nil {
