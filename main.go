@@ -6,10 +6,12 @@ import (
 	"github.com/gourds/upload2remote/util"
 	"github.com/wonderivan/logger"
 	"path"
+	"sync"
 )
 
 func main() {
 	var data providers.ObManager
+	var wg = config.Multi{WG: sync.WaitGroup{}, UploadResult: [3]int{0, 0, 0}}
 	defer util.MeasureTime("main")()
 	data = providers.GetConfig()
 	logger.Info(data)
@@ -19,19 +21,16 @@ func main() {
 		return
 	}
 
-
 	files, err := util.ListDir(config.CommonCfg.SrcPath)
 	if err != nil {
 		logger.Error("源路径错误", err)
 	}
-	s,f := 0,0
 	for _, eachFile := range files {
-		s+=1
+		wg.WG.Add(1)
+		wg.UploadResult[0] += 1
 		objPath := path.Join(config.CommonCfg.RemoteRootPath, eachFile)
-		err = data.UploadFile(objPath, eachFile, auth)
-		if err != nil {
-			f+=1
-		}
+		go data.UploadFile(objPath, eachFile, auth, &wg)
 	}
-	logger.Info("总共:%d\t成功:%d\t失败:%d",s,s-f,f)
+	wg.WG.Wait()
+	logger.Info("总共:%d\t成功:%d\t失败:%d",wg.UploadResult[0],wg.UploadResult[1],wg.UploadResult[2])
 }

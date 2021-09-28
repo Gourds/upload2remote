@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/gourds/upload2remote/config"
 	"github.com/wonderivan/logger"
 	"net/http"
 	"os"
@@ -23,8 +24,8 @@ func (c *S3) Auth() (SessionType, error) {
 	return SessionType{s3: client}, err
 }
 
-func (c *S3) UploadFile(objName string, filePath string, client SessionType) (err error){
-
+func (c *S3) UploadFile(objName string, filePath string, client SessionType, wg *config.Multi) (err error) {
+	defer wg.WG.Done()
 	file, err := os.Open(filePath)
 	if err != nil {
 		logger.Error(err)
@@ -47,9 +48,11 @@ func (c *S3) UploadFile(objName string, filePath string, client SessionType) (er
 		StorageClass:         aws.String("INTELLIGENT_TIERING"),
 	})
 	if err != nil {
+		wg.UploadResult[2] += 1
 		logger.Error(err)
 		return
 	}
+	wg.UploadResult[1] += 1
 	logger.Info("Upload %s To %s://%s Success", filePath, c.Type, path.Join(c.Bucket, objName))
 	return
 }

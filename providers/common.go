@@ -11,7 +11,7 @@ import (
 
 type ObManager interface {
 	Auth() (SessionType, error)
-	UploadFile(string, string, SessionType) error
+	UploadFile(string, string, SessionType, *config.Multi) error
 }
 
 type SessionType struct {

@@ -2,6 +2,7 @@ package providers
 
 import (
 	"bytes"
+	"github.com/gourds/upload2remote/config"
 	"github.com/ks3sdklib/aws-sdk-go/aws"
 	"github.com/ks3sdklib/aws-sdk-go/aws/credentials"
 	"github.com/ks3sdklib/aws-sdk-go/service/s3"
@@ -26,7 +27,8 @@ func (c *KS3) Auth() (SessionType, error) {
 	return SessionType{ks3: client}, nil
 }
 
-func (c *KS3) UploadFile(objName string, filePath string, client SessionType) (err error) {
+func (c *KS3) UploadFile(objName string, filePath string, client SessionType, wg *config.Multi) (err error) {
+	defer wg.WG.Done()
 	file, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		logger.Error(err)
@@ -44,9 +46,11 @@ func (c *KS3) UploadFile(objName string, filePath string, client SessionType) (e
 	}
 	_, err = client.ks3.PutObject(params)
 	if err != nil {
+		wg.UploadResult[2] += 1
 		logger.Error(err)
 		return
 	}
+	wg.UploadResult[1] += 1
 	logger.Info("Upload %s To %s://%s Success", filePath, c.Type, path.Join(c.Bucket, objName))
 	return
 }

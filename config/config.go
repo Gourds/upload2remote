@@ -3,12 +3,18 @@ package config
 import (
 	"fmt"
 	"github.com/wonderivan/logger"
+	"sync"
 )
 
 var (
 	CommonCfg   Config
 	InputConfig Config
 )
+
+type Multi struct {
+	WG           sync.WaitGroup
+	UploadResult [3]int // ary[0] = all ary[1] = success ary[2] = failed
+}
 
 type Config struct {
 	Type            string `toml:"type"`
@@ -22,7 +28,7 @@ type Config struct {
 	Region          string `toml:"Region"`
 }
 
-func GetConfig() (err error ){
+func GetConfig() (err error) {
 	initConfig()
 	if CommonCfg.DestPath == "" || CommonCfg.SrcPath == "" {
 		err = fmt.Errorf("没有配置源或目标路径")
@@ -31,9 +37,9 @@ func GetConfig() (err error ){
 	return
 }
 
-func init(){
+func init() {
 	err := GetConfig()
-	if err != nil{
+	if err != nil {
 		logger.Fatal("初始化配置失败", err)
 	}
 	logger.Info("初始化配置成功")
