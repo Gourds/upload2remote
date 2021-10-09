@@ -28,17 +28,15 @@
 - [x] 统计耗时
 - [x] 统计数量
 - [x] 并发上传支持
-- [ ] 断点续传
 
 
 ### support & Document
 
-- [x] Aliyun: https://help.aliyun.com/document_detail/88426.html
-- [ ] 微软云
-- [x] 华为云：https://sdkcenter.developer.huaweicloud.com/?product=obs
-- [x] aws: https://docs.aws.amazon.com/sdk-for-go/api/service/s3/
-- [x] 金山云 ks3 https://console.huaweicloud.com/console/?region=cn-east-3#/obs/manage/jws2-ops-backup-data/object/list
-
+- [x] [阿里云 oss](https://help.aliyun.com/document_detail/88426.html)
+- [x] [华为云 obs](https://sdkcenter.developer.huaweicloud.com/?product=obs)
+- [x] [亚马逊 s3](https://docs.aws.amazon.com/sdk-for-go/api/service/s3/)
+- [x] [金山云 ks3](https://console.huaweicloud.com/console/?region=cn-east-3#/obs/manage/jws2-ops-backup-data/object/list)
+- [x] [微软云 blob](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/storage#Blob.CreateBlockBlobFromReader)
 
 
 
